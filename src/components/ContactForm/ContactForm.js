@@ -30,7 +30,7 @@ const ContactForm = () => {
   };
 
   const repeatCheck = newName => {
-    return items.find(({ name }) => name === newName);
+    return items.find(({ name }) => name.toLowerCase() === newName);
   };
 
   const handleSubmit = e => {

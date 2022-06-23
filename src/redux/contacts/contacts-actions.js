@@ -18,5 +18,4 @@ const contactsActions = {
   deleteContact,
   changeFilter,
 };
-
 export default contactsActions;

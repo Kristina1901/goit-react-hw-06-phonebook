@@ -25,8 +25,8 @@ const ContactForm = () => {
     }
   };
 
-  const showNotification = () => {
-    alert('Sorry');
+  const showNotification = name => {
+    alert(`${name} is already in contacts`);
   };
 
   const repeatCheck = newName => {

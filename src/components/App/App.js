@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux';
 import { getVisibleItems } from '../../redux/contacts/contacts-selector';
-import Section from '../Section';
 import Container from '../Container';
 import ContactForm from '../ContactForm';
 import Filter from '../Filter';
@@ -18,11 +17,11 @@ const App = () => {
           <h1 className={s.title}>Phonebook</h1>
         </Container>
       </header>
-      <Section>
+      <div>
         <div>
           <ContactForm />
         </div>
-      </Section>
+      </div>
       <div className={s.sectionList}>
         <h2 className={s.contact}>Filter Contacts</h2>
         <Filter />

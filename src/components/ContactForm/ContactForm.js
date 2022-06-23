@@ -1,13 +1,19 @@
-import s from '../ContactForm/ContactForm.module.css';
 import { useState } from 'react';
-import PropTypes from 'prop-types';
-const ContactForm = ({ onSubmit }) => {
+import { useDispatch, useSelector } from 'react-redux';
+import { getItems } from '../../redux/contacts/contacts-selector';
+import contactsActions from '../../redux/contacts/contacts-actions';
+import s from './ContactForm.module.css';
+
+const ContactForm = () => {
+  const items = useSelector(getItems);
+  const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
   const handleGetValue = e => {
-    const prop = e.currentTarget.name;
-    switch (prop) {
+    const field = e.currentTarget.name;
+
+    switch (field) {
       case 'name':
         setName(e.currentTarget.value);
         break;
@@ -18,15 +24,30 @@ const ContactForm = ({ onSubmit }) => {
         throw new Error();
     }
   };
+
+  const showNotification = () => {
+    alert('Sorry');
+  };
+
+  const repeatCheck = newName => {
+    return items.find(({ name }) => name === newName);
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
-    onSubmit({ name, number });
+    if (repeatCheck(name)) {
+      showNotification();
+      return;
+    }
+
+    dispatch(contactsActions.addContact({ name, number }));
     setName('');
     setNumber('');
   };
+
   return (
     <form onSubmit={handleSubmit} className={s.form}>
-      <label>
+      <label className={s.label}>
         Name
         <input
           className={s.namefirst}
@@ -43,7 +64,7 @@ const ContactForm = ({ onSubmit }) => {
       <label className={s.inputc}>
         Number
         <input
-          className={s.namesecond}
+          className={s.input}
           value={number}
           onChange={handleGetValue}
           placeholder="459-12-56"
@@ -62,6 +83,3 @@ const ContactForm = ({ onSubmit }) => {
 };
 
 export default ContactForm;
-ContactForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};

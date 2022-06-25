@@ -36,7 +36,7 @@ const ContactForm = () => {
   const handleSubmit = e => {
     e.preventDefault();
     if (repeatCheck(name)) {
-      showNotification();
+      showNotification(name);
       return;
     }
 

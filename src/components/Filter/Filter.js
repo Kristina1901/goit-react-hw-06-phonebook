@@ -5,7 +5,7 @@ const Filter = () => {
   const dispatch = useDispatch();
   const filter = useSelector(getFilter);
   const handleFilterValue = e =>
-    dispatch(contactsActions.changeFilter(e.currentTarget.value.trim()));
+    dispatch(contactsActions.changeFilter(e.currentTarget.value));
 
   return (
     <label>
